@@ -38,6 +38,18 @@ class Analytics
         return $this;
     }
 
+    public function fetchTotalVisitors($period)
+    {
+        $response = $this->performQuery(
+            $period,
+            'ga:users'
+        );
+        $arr = 0;
+        if(array_key_exists("rows", $response))
+            $arr = $response['rows'][0][0];
+        return $arr;
+    }
+    
     public function fetchVisitorsAndPageViews($period)
     {
         $response = $this->performQuery(
