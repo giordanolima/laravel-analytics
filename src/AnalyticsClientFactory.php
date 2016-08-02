@@ -23,7 +23,7 @@ class AnalyticsClientFactory
 
         $arr = storage_path('app/laravel-google-analytics/google-cache/');
         if(is_array($config) && array_key_exists("cache_location", $config))
-            $arr = $config['rows'];
+            $arr = $config['cache_location'];
         $client->setClassConfig(
             'Google_Cache_File', 
             'directory', 
