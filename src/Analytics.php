@@ -43,19 +43,27 @@ class Analytics
         $response = $this->performQuery(
             $period,
             'ga:users,ga:pageviews',
-            ['dimensions' => 'ga:date,ga:pageTitle']
+            ['dimensions' => 'ga:date']
         );
         $arr = [];
         if(array_key_exists("rows", $response))
             $arr = $response['rows'];
+        dd($arr);
         return collect($arr)->map(function (array $dateRow) {
             return [
                 'date' => Carbon::createFromFormat('Ymd', $dateRow[0]),
-                'pageTitle' => $dateRow[1],
-                'visitors' => (int) $dateRow[2],
-                'pageViews' => (int) $dateRow[3],
+                'visitors' => (int) $dateRow[1],
+                'pageViews' => (int) $dateRow[2],
             ];
         });
+    }
+    
+    public function fetchRealTimeActiveUsers() {
+        $response = $this->getAnalyticsService()->data_realtime->get(
+            "ga:{$this->viewId}",
+            "rt:activeUsers"
+        );
+        return $response["totalResults"];
     }
 
     public function fetchMostVisitedPages($period, $maxResults = 20)
