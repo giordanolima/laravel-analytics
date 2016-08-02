@@ -2,10 +2,6 @@
 
 namespace Spatie\Analytics;
 
-use DateTime;
-use Google_Service_Analytics;
-use Illuminate\Contracts\Cache\Repository;
-
 class AnalyticsClient
 {
     /** @var \Google_Service_Analytics */
@@ -17,7 +13,7 @@ class AnalyticsClient
     /** @var int */
     protected $cacheLifeTimeInMinutes = 0;
 
-    public function __construct(Google_Service_Analytics $service, Repository $cache)
+    public function __construct($service, $cache)
     {
         $this->service = $service;
 
@@ -31,7 +27,7 @@ class AnalyticsClient
      *
      * @return self
      */
-    public function setCacheLifeTimeInMinutes(int $cacheLifeTimeInMinutes)
+    public function setCacheLifeTimeInMinutes($cacheLifeTimeInMinutes)
     {
         $this->cacheLifeTimeInMinutes = $cacheLifeTimeInMinutes;
 
@@ -49,7 +45,7 @@ class AnalyticsClient
      *
      * @return array|null
      */
-    public function performQuery(string $viewId, DateTime $startDate, DateTime $endDate, string $metrics, array $others = [])
+    public function performQuery($viewId, $startDate, $endDate, $metrics, $others = [])
     {
         $cacheName = $this->determineCacheName(func_get_args());
 
@@ -69,7 +65,7 @@ class AnalyticsClient
         });
     }
 
-    public function getAnalyticsService(): Google_Service_Analytics
+    public function getAnalyticsService()
     {
         return $this->service;
     }
@@ -77,7 +73,7 @@ class AnalyticsClient
     /*
      * Determine the cache name for the set of query properties given.
      */
-    protected function determineCacheName(array $properties): string
+    protected function determineCacheName(array $properties)
     {
         return 'spatie.laravel-analytics.'.md5(serialize($properties));
     }
