@@ -48,7 +48,6 @@ class Analytics
         $arr = [];
         if(array_key_exists("rows", $response))
             $arr = $response['rows'];
-        dd($arr);
         return collect($arr)->map(function (array $dateRow) {
             return [
                 'date' => Carbon::createFromFormat('Ymd', $dateRow[0]),
