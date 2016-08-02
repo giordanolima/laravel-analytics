@@ -46,7 +46,7 @@ class Analytics
             ['dimensions' => 'ga:date,ga:pageTitle']
         );
         $arr = [];
-        if(is_array($response) && array_key_exists("rows", $response))
+        if(array_key_exists("rows", $response))
             $arr = $response['rows'];
         return collect($arr)->map(function (array $dateRow) {
             return [
@@ -70,7 +70,7 @@ class Analytics
             ]
         );
         $arr = [];
-        if(is_array($response) && array_key_exists("rows", $response))
+        if(array_key_exists("rows", $response))
             $arr = $response['rows'];
         return collect($arr)
             ->map(function (array $pageRow) {
@@ -93,7 +93,7 @@ class Analytics
             ]
         );
         $arr = [];
-        if(is_array($response) && array_key_exists("rows", $response))
+        if(array_key_exists("rows", $response))
             $arr = $response['rows'];
         return collect($arr)->map(function (array $pageRow) {
             return [
@@ -115,7 +115,7 @@ class Analytics
         );
 
         $arr = [];
-        if(is_array($response) && array_key_exists("rows", $response))
+        if(array_key_exists("rows", $response))
             $arr = $response['rows'];
         $topBrowsers = collect($arr)->map(function (array $browserRow) {
             return [
