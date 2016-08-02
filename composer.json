@@ -1,5 +1,5 @@
 {
-  "name": "spatie/laravel-analytics",
+  "name": "giordanolima/laravel-analytics",
   "description": "A Laravel 5 package to retrieve Google Analytics data.",
   "keywords": [
     "spatie",
@@ -20,7 +20,7 @@
     }
   ],
   "require": {
-    "php" : "^7.0",
+    "php" : "^5.4",
     "illuminate/contracts": "^5.1",
     "illuminate/support": "^5.1",
     "google/apiclient" : "^1.1",
